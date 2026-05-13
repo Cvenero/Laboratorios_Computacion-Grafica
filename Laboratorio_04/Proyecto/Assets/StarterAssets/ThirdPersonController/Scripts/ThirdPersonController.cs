@@ -24,8 +24,7 @@ namespace StarterAssets
         public float GroundedOffset = -0.14f;
         public float GroundedRadius = 0.28f;
         public LayerMask GroundLayers;
-
-        // Referencia a cámara — la usarás cuando implementes primera/tercera persona
+        
         private GameObject _mainCamera;
 
         private CharacterController _controller;
