@@ -29,7 +29,7 @@ public class Superliminal : MonoBehaviour
 
         if (target != null)
         {
-            // Cambia el tamaño y posición EN TIEMPO REAL para mantener la ilusión perfecta
+            // Cambia el tamaÃ±o y posicion en tiempo real para mantener la ilusion
             ResizeAndPositionTarget();
         }
     }
@@ -73,52 +73,50 @@ public class Superliminal : MonoBehaviour
         RaycastHit hit;
         Vector3 targetDirection = transform.forward;
 
-        // Lanzamos un raycast continuo hacia el fondo para saber a qué distancia está la pared/suelo
+        // Lanzamos un raycast continuo hacia el fondo para saber a que distancia estÃ¡ la pared/suelo
         if (Physics.Raycast(transform.position, targetDirection, out hit, 100f, ignoreTargetMask))
         {
             currentDistance = Vector3.Distance(transform.position, hit.point);
         }
         else
         {
-            currentDistance = 15f; // Distancia por defecto si miras al cielo vacío
+            currentDistance = 15f; // Distancia por defecto si se mira al cielo vacÃ­o
         }
 
-        // Límite mínimo de distancia para evitar que el objeto colapse en tu cara
+        // Limite mÃ­nimo de distancia para evitar que el objeto colapse en nuestro frente
         if (currentDistance < 1.5f) currentDistance = 1.5f;
-
-        // REGLA DE ORO DE LA ILUSIÓN:
-        // El factor de escala se calcula a cada fotograma. Si el fondo está lejos, la pelota
-        // se hace gigante en tu mano. Al ojo humano le parecerá que no ha cambiado de tamaño en absoluto.
+        
+        // El factor de escala se calcula a cada fotograma. Si el fondo esta lejos, la pelota
+        // se hace gigante en la mano. Al ojo humano le parecera que no ha cambiado de tamaÃ±o.
         float scaleFactor = currentDistance / originalDistance;
 
-        // Límites de seguridad para que las físicas no se rompan
+        // LÃ­mites de seguridad para que las fÃ­sicas no se rompan
         if (scaleFactor > 12f) scaleFactor = 12f;
         if (scaleFactor < 0.1f) scaleFactor = 0.1f;
 
         // Aplicamos la escala en tiempo real
         target.localScale = originalScale * scaleFactor;
-
-        // SOLUCIÓN AL HUNDIMIENTO:
+        
         // Tomamos el punto de impacto en la pared/suelo (hit.point) y le sumamos el radio del objeto
-        // multiplicado por 'hit.normal' (la dirección perpendicular a la superficie).
+        // multiplicado por 'hit.normal' (la direcciÃ³n perpendicular a la superficie).
         // Esto empuja la pelota hacia afuera del suelo o muro, evitando que se entierre.
         float objectRadius = target.GetComponent<Collider>() != null ? target.GetComponent<Collider>().bounds.extents.x : target.localScale.x * 0.5f;
 
         if (hit.collider != null)
         {
-            // Si hay un impacto válido, se apoya perfectamente en la superficie usando la normal
+            // Si hay un impacto vÃ¡lido, se apoya perfectamente en la superficie usando la normal
             target.position = hit.point + (hit.normal * objectRadius);
         }
         else
         {
-            // Si apuntas al vacío, flota en el aire frente a ti
+            // Si apuntamos al vacio, flota en el aire frente a nosotros
             target.position = transform.position + (targetDirection * currentDistance);
         }
     }
 
     void DropTarget()
     {
-        // Al soltar, como el objeto ya tiene el tamaño y posición calculados en tiempo real,
+        // Al soltar, como el objeto ya tiene el tamaÃ±o y posiciÃ³n calculados en tiempo real,
         // solo le devolvemos la gravedad de inmediato sin saltos visuales bruscos.
         if (target.GetComponent<Rigidbody>() != null)
         {
