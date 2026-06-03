@@ -7,7 +7,7 @@ public class MultiPerspectiveCamera : MonoBehaviour
 {
     public bool tPerson = true;
 
-    [Header("Objetivos de c·mara")]
+    [Header("Objetivos de c√°mara")]
     public Transform tpTarget;
     public Transform fpTarget;
 
@@ -22,7 +22,7 @@ public class MultiPerspectiveCamera : MonoBehaviour
     private float defaultDistance;
     private float newDistance;
 
-    [Header("Ajustes de C·mara")]
+    [Header("Ajustes de C√°mara")]
     public float maxDistace = 7f;
     public float minDistance = 2f;
     public int zoomVelocity = 300;
@@ -32,10 +32,9 @@ public class MultiPerspectiveCamera : MonoBehaviour
     [Header("Tecla para cambiar perspectiva")]
     public Key switchKey = Key.Q;
 
-    [Header("InteracciÛn (Enlace Superliminal)")]
-    public Superliminal superliminalScript; // Asigna aquÌ la misma c·mara que tiene el script Superliminal
-
-    // Variables para el nuevo Input System
+    [Header("Interacci√≥n (Enlace Superliminal)")]
+    public Superliminal superliminalScript;
+    
     private Vector2 mouseDelta;
     private float scrollDelta;
 
@@ -148,7 +147,7 @@ public class MultiPerspectiveCamera : MonoBehaviour
         {
             if (Physics.Raycast(point, direction, out RaycastHit hit, defaultDistance))
             {
-                // DETECCI”N E IGNORADO: Si el objeto golpeado por la c·mara es la pelota que cargamos, lo ignoramos
+                // Si el objeto golpeado por la c√°mara es la pelota que cargamos, lo ignoramos
                 if (superliminalScript != null && superliminalScript.target != null && hit.transform == superliminalScript.target)
                 {
                     continue;
