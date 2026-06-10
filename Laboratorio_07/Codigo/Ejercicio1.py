@@ -42,5 +42,5 @@ cv2.imshow("Aguila", img1_redim)
 cv2.imshow("Gato", img2_redim)
 cv2.imshow("Lobo", img3_redim)
 
-cv2.waitKey(0)  # Espera a que presiones cualquier tecla para cerrar
+cv2.waitKey(0)  # Espera cualquier tecla para cerrar
 cv2.destroyAllWindows()
